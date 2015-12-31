@@ -45,8 +45,7 @@ import {CloudtasksService, CloudtasksDirective} from 'angular2-cloudtasks/angula
 
 @Injectable()
 @Component({
-	selector: 'app',
-	providers: [CloudtasksService]
+	selector: 'app'
 })
 @View({
 	template: `<img [ctSrc]="'http://example.com/image.jpg'" [ctOptions]="{trim: true, smart: 'face', filters: 'blur(10):flip()'}">`,

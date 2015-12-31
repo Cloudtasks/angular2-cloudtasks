@@ -26,6 +26,7 @@ export function main() {
 	  class TestComponent {
 	  	constructor(cloudtasks: CloudtasksService) {
 				cloudtasks.setId('YOUR_CLIENT_ID');
+				cloudtasks.settings.options = {};
 			}
 	  }
 
@@ -35,7 +36,7 @@ export function main() {
 					fixture.detectChanges();
         	let compiled = fixture.debugElement.nativeElement.children[0];
 
-					expect(compiled.src).toBe('http://images.cloudtasks.io/YOUR_CLIENT_ID/convert:webp/trim/origxorig/http%3A%2F%2Fexample.com%2Fimage.jpg');
+					expect(compiled.src).toBe('http://images.cloudtasks.io/YOUR_CLIENT_ID/trim/origxorig/http%3A%2F%2Fexample.com%2Fimage.jpg');
 				});
 		}));
 	});
