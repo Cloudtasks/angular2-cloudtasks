@@ -14,12 +14,12 @@ export function main() {
 
 		it('sets the client id', () => {
 			service.setId('Demo');
-			expect(service.ctSettings.clientId).toBe('Demo');
+			expect(service.settings.clientId).toBe('Demo');
 		});
 
 		it('changes service settings', () => {
-			service.ctSettings.dev = true;
-			expect(service.ctSettings.dev).toBe(true);
+			service.settings.dev = true;
+			expect(service.settings.dev).toBe(true);
 		});
 
 		it('gets service settings', () => {

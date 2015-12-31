@@ -2,7 +2,7 @@ import {Injectable} from 'angular2/core';
 
 @Injectable()
 export class CloudtasksService {
-	public ctSettings = {
+	public settings = {
 		clientId: '',
 		dev: false,
 		options: {},
@@ -12,7 +12,7 @@ export class CloudtasksService {
 
 	constructor() {
 		if (this.canUseWebP()) {
-			this.ctSettings.options = {
+			this.settings.options = {
 				convert: 'webp'
 			};
 		}
@@ -23,7 +23,7 @@ export class CloudtasksService {
 	* @param id
 	*/
 	public setId(id: string) {
-		return this.ctSettings.clientId = id;
+		return this.settings.clientId = id;
 	}
 
 	/**
@@ -31,7 +31,7 @@ export class CloudtasksService {
 	* @returns {any}
 	*/
 	public getSettings(): any {
-		return this.ctSettings;
+		return this.settings;
 	}
 
 	/**

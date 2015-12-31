@@ -29,8 +29,14 @@ export class CloudtasksDirective implements OnInit, AfterContentChecked {
 
 	cloudtasks: CloudtasksService;
 
-	constructor(cloudtasks: CloudtasksService) {
-		this.element = this.el.nativeElement;
+	constructor(
+		el: ElementRef,
+		renderer: Renderer,
+		cloudtasks: CloudtasksService
+	) {
+		this.el = el;
+		this.renderer = renderer;
+		this.element = this.renderer.getNativeElementSync(this.el);
 
 		this.cloudtasks = cloudtasks;
 		this.settings = cloudtasks.getSettings();
@@ -38,7 +44,11 @@ export class CloudtasksDirective implements OnInit, AfterContentChecked {
 
 	ngOnInit() {
 		if (!this.settings.clientId.length) {
-			throw('Cloudtasks: You need to configure your clientId');
+			throw('Cloudtasks: You need to configure your clientId.');
+		}
+
+		if (!this.imageSource) {
+			throw('Cloudtasks: You need to provide an URL string on [ngSrc].');
 		}
 
 		if (this.imageSource.indexOf('http') === -1) {

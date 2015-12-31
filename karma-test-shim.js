@@ -7,6 +7,17 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 100;
 // we will call `__karma__.start()` later, once all the specs are loaded.
 __karma__.loaded = function() {};
 
+function onlySpecFiles(path) {
+	return /[\.|_]spec\.js$/.test(path);
+}
+
+// Normalize paths to module names.
+function file2moduleName(filePath) {
+	return filePath.replace(/\\/g, '/')
+		.replace(/^\/base\//, '')
+		.replace(/\.js/, '');
+}
+
 System.config({
 	baseURL: '/base/',
 	defaultJSExtensions: true,
@@ -39,15 +50,3 @@ System.import('angular2/src/platform/browser/browser_adapter').then(function(bro
 		console.error(error.stack || error);
 		__karma__.start();
 	});
-
-
-function onlySpecFiles(path) {
-	return /[\.|_]spec\.js$/.test(path);
-}
-
-// Normalize paths to module names.
-function file2moduleName(filePath) {
-	return filePath.replace(/\\/g, '/')
-		.replace(/^\/base\//, '')
-		.replace(/\.js/, '');
-}

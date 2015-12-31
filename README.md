@@ -1,7 +1,7 @@
 # [angular2-cloudtasks](https://cloudtasks.io)
 [![npm version](https://img.shields.io/npm/v/angular2-cloudtasks.svg?style=flat)](https://www.npmjs.com/package/angular2-cloudtasks)
 [![Build Status](https://img.shields.io/travis/twbs/angular2-cloudtasks/master.svg?style=flat)](https://travis-ci.org/Cloudtasks/angular2-cloudtasks)
-[![Codacy Badge](https://www.codacy.com/project/badge/556dd3b19d804062a653336f35987384)](https://www.codacy.com/public/jonnybgod/angular2-cloudtasks)
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/bafd522f82da48fda8bb25bee689b32f)](https://www.codacy.com/app/jonnybgod/angular2-cloudtasks)
 
 [![Github Releases](https://img.shields.io/github/downloads/Cloudtasks/angular2-cloudtasks/latest/total.svg)]()
 
@@ -45,10 +45,11 @@ import {CloudtasksService, CloudtasksDirective} from 'angular2-cloudtasks/angula
 
 @Injectable()
 @Component({
-	selector: 'app'
+	selector: 'app',
+	providers: [CloudtasksService]
 })
 @View({
-	template: `<img [ctSrc]="{{imgUrl}}" [ctOptions]="{trim: true, smart: 'face', filters: 'blur(10):flip()'}">`,
+	template: `<img [ctSrc]="'http://example.com/image.jpg'" [ctOptions]="{trim: true, smart: 'face', filters: 'blur(10):flip()'}">`,
 	directives: [CloudtasksDirective]
 })
 export class AppComponent {
