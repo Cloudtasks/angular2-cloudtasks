@@ -60,19 +60,26 @@ export class CloudtasksDirective implements OnInit, AfterViewChecked {
 	ngAfterViewChecked() {
 		this.parseOptions();
 
-		this.getElementSize()
-		.then((rect: any) => {
-			this.width = rect.width;
-			this.height = rect.height;
+		if (this.ctSize) {
+			this.init();
+		} else {
+			new Ruler(DOM).measure(this.el)
+				.then((rect: any) => {
+					this.width = rect.width;
+					this.height = rect.height;
 
-			if (this.ctDefaultImage || this.settings.defaultImage) {
-				this.renderer.setElementStyle(this.el, 'background-image', 'url(//'+ this.getDefaultURL() +')');
-			}
-
-			this.renderer.setElementAttribute(this.el, 'src', this.getURL());
-		});
+					this.init();
+				});
+		}
 	}
 
+	init() {
+		if (this.ctDefaultImage || this.settings.defaultImage) {
+			this.renderer.setElementStyle(this.el, 'background-image', 'url(//'+ this.getDefaultURL() +')');
+		}
+
+		this.renderer.setElementAttribute(this.el, 'src', this.getURL());
+	}
 
 	onError() {
 		if (this.ctDefaultImage || this.settings.defaultImage) {
@@ -93,11 +100,6 @@ export class CloudtasksDirective implements OnInit, AfterViewChecked {
 		this.settings.clientId +'/'+
 		this.getSize() +'/'+
 		encodeURIComponent(decodeURIComponent((this.ctDefaultImage || this.settings.defaultImage)));
-	}
-
-	getElementSize(): any {
-		const ruler = new Ruler(DOM);
-		return ruler.measure(this.el);
 	}
 
 	getSize(): string {
