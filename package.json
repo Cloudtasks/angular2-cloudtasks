@@ -27,7 +27,7 @@
     "typescript": "~1.7.3"
   },
   "scripts": {
-  	"lint": "tslint ./angular2-cloudtasks.ts ./src/cloudtasks.directive.ts ./src/cloudtasks.service.ts",
+    "lint": "tslint ./angular2-cloudtasks.ts ./src/cloudtasks.directive.ts ./src/cloudtasks.service.ts",
     "test": "tsc && karma start",
     "commit": "git-cz",
     "prepublish": "tsc",

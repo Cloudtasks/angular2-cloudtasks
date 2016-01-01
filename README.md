@@ -90,7 +90,7 @@ Example:
 ```
 
 ## TODO
-- WebWorker Support (MessageBus)
+- Find a way to detect parent size (without direct DOM access)
 
 ## License
 

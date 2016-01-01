@@ -1,5 +1,7 @@
-import {Directive, Injectable, ElementRef, Renderer, Input, OnInit, AfterContentChecked} from 'angular2/core';
+import {Directive, Injectable, ElementRef, Renderer, Input, OnInit, AfterViewChecked} from 'angular2/core';
 //import {MessageBus} from 'angular2/web_worker/worker';
+import {DOM} from 'angular2/src/platform/dom/dom_adapter';
+import {Ruler} from 'angular2/src/platform/browser/ruler';
 import {CloudtasksService} from './cloudtasks.service';
 
 @Injectable()
@@ -9,7 +11,7 @@ import {CloudtasksService} from './cloudtasks.service';
 		'(error)': 'onError()'
 	}
 })
-export class CloudtasksDirective implements OnInit, AfterContentChecked {
+export class CloudtasksDirective implements OnInit, AfterViewChecked {
 	@Input('ctSrc') imageSource: string;
 	@Input() ctOptions: any;
 	@Input() ctDefaultImage: string;
@@ -17,7 +19,6 @@ export class CloudtasksDirective implements OnInit, AfterContentChecked {
 	@Input() ctForceSize: boolean;
 
 	private el: ElementRef;
-	private element: HTMLElement;
 	private renderer: Renderer;
 
 	//private bus: MessageBus;
@@ -36,7 +37,6 @@ export class CloudtasksDirective implements OnInit, AfterContentChecked {
 	) {
 		this.el = el;
 		this.renderer = renderer;
-		this.element = this.renderer.getNativeElementSync(this.el);
 
 		this.cloudtasks = cloudtasks;
 		this.settings = cloudtasks.getSettings();
@@ -57,15 +57,20 @@ export class CloudtasksDirective implements OnInit, AfterContentChecked {
 
 	}
 
-	ngAfterContentChecked() {
-		this.calculateSize();
+	ngAfterViewChecked() {
 		this.parseOptions();
 
-		if (this.ctDefaultImage || this.settings.defaultImage) {
-			this.renderer.setElementStyle(this.el, 'background-image', 'url(//'+ this.getDefaultURL() +')');
-		}
+		this.getElementSize()
+		.then((rect: any) => {
+			this.width = rect.width;
+			this.height = rect.height;
 
-		this.renderer.setElementAttribute(this.el, 'src', this.getURL());
+			if (this.ctDefaultImage || this.settings.defaultImage) {
+				this.renderer.setElementStyle(this.el, 'background-image', 'url(//'+ this.getDefaultURL() +')');
+			}
+
+			this.renderer.setElementAttribute(this.el, 'src', this.getURL());
+		});
 	}
 
 
@@ -90,26 +95,9 @@ export class CloudtasksDirective implements OnInit, AfterContentChecked {
 		encodeURIComponent(decodeURIComponent((this.ctDefaultImage || this.settings.defaultImage)));
 	}
 
-	calculateSize() {
-		if (this.element) {
-			this.width = this.element.clientWidth;
-			this.height = this.element.clientHeight;
-
-			if (!this.width && !this.height) {
-				this.width = this.element.parentElement.clientWidth;
-				this.height = this.element.parentElement.clientHeight;
-			}
-		} else {
-			// Probably running Inside WebWorker
-			// TODO: Implement UI side code
-			/*this.bus.initChannel("CT_Directive_MessageBus");
-	    this.bus.from("CT_Directive_MessageBus").observer((message: any) => {
-	      let size = JSON.parse(message);
-
-	      this.width = size.width;
-	      this.height = size.height;
-	    });*/
-		}
+	getElementSize(): any {
+		const ruler = new Ruler(DOM);
+		return ruler.measure(this.el);
 	}
 
 	getSize(): string {

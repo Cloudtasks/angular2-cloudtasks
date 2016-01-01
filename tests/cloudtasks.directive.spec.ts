@@ -1,10 +1,12 @@
 import {
-  it,
-  inject,
-  injectAsync,
-  describe,
-  beforeEachProviders,
-  TestComponentBuilder
+	it,
+	inject,
+	injectAsync,
+	describe,
+	beforeEachProviders,
+	TestComponentBuilder,
+	fakeAsync,
+  tick
 } from 'angular2/testing';
 
 import {Component, View} from 'angular2/core';
@@ -23,60 +25,76 @@ export function main() {
 			template: ``,
 			directives: [CloudtasksDirective]
 		})
-	  class TestComponent {
-	  	constructor(cloudtasks: CloudtasksService) {
+		class TestComponent {
+			constructor(cloudtasks: CloudtasksService) {
 				cloudtasks.setId('YOUR_CLIENT_ID');
 			}
-	  }
+		}
 
-		it('should set img src', injectAsync([TestComponentBuilder], (tcb: any) => {
+		it('should set img src', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
 			return tcb.overrideTemplate(TestComponent, `<img [ctSrc]="'http://example.com/image.jpg'" [ctOptions]="{trim: true}" [ctSize]="'origxorig'"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
-        	let compiled = fixture.debugElement.nativeElement.children[0];
+					let compiled = fixture.debugElement.nativeElement.children[0];
 
+					tick();
 					expect(compiled.src).toMatch(/\/\/images.cloudtasks.io\/YOUR_CLIENT_ID/);
 				});
-		}));
+		})));
 
-		it('should detect element size', injectAsync([TestComponentBuilder], (tcb: any) => {
+		it('should detect element size', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
 			return tcb.overrideTemplate(TestComponent, `<img [ctSrc]="'http://example.com/image.jpg'" style="width: 800px; height: 600px"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
-        	let compiled = fixture.debugElement.nativeElement.children[0];
+					let compiled = fixture.debugElement.nativeElement.children[0];
 
+					tick();
 					expect(compiled.src).toMatch(/800x600/);
 				});
-		}));
+		})));
 
-		it('should force size', injectAsync([TestComponentBuilder], (tcb: any) => {
+		/*it('should detect parent element size', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
+			return tcb.overrideTemplate(TestComponent, `<div style="width: 800px; height: 600px"><img [ctSrc]="'http://example.com/image.jpg'"/></div>`)
+				.createAsync(TestComponent).then((fixture: any) => {
+					fixture.detectChanges();
+					let compiled = fixture.debugElement.nativeElement.querySelector('img');
+
+					tick();
+					expect(compiled.src).toMatch(/800x600/);
+				});
+		})));*/
+
+		it('should force size', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
 			return tcb.overrideTemplate(TestComponent, `<img [ctSrc]="'http://example.com/image.jpg'" style="width: 823px; height: 312px" [ctForceSize]="true"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
-        	let compiled = fixture.debugElement.nativeElement.children[0];
+					let compiled = fixture.debugElement.nativeElement.children[0];
 
+					tick();
 					expect(compiled.src).toMatch(/823x312/);
 				});
-		}));
+		})));
 
-		it('should pass options', injectAsync([TestComponentBuilder], (tcb: any) => {
+		it('should pass options', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
 			return tcb.overrideTemplate(TestComponent, `<img [ctSrc]="'http://example.com/image.jpg'" [ctOptions]="{trim: true}"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
-        	let compiled = fixture.debugElement.nativeElement.children[0];
+					let compiled = fixture.debugElement.nativeElement.children[0];
 
+					tick();
 					expect(compiled.src).toMatch(/trim/);
 				});
-		}));
+		})));
 		
-		it('should set default image', injectAsync([TestComponentBuilder], (tcb: any) => {
+		it('should set default image', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
 			return tcb.overrideTemplate(TestComponent, `<img [ctSrc]="'http://example.com/image.jpg'" [ctDefaultImage]="'http://example.com/defaultImage.jpg'"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
-        	let compiled = fixture.debugElement.nativeElement.children[0];
-
+					let compiled = fixture.debugElement.nativeElement.children[0];
+					
+					tick();
 					expect(compiled.style['background-image']).toMatch(/defaultImage/);
 				});
-		}));
+		})));
 	});
 }
