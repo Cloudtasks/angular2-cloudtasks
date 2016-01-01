@@ -1,7 +1,6 @@
 {
   "author": "Cloudtasks.io",
   "name": "angular2-cloudtasks",
-  "version": "0.0.1",
   "description": "Allows you to serve highly optimized images to your client apps.",
   "homepage": "https://cloudtasks.io",
   "dependencies": {
@@ -21,7 +20,7 @@
     "karma-firefox-launcher": "~0.1.7",
     "karma-jasmine": "~0.3.6",
     "karma-typescript-preprocessor": "0.0.21",
-    "semantic-release": "~4.3.5",
+    "semantic-release": "^4.3.5",
     "systemjs": "~0.19.6",
     "tslint": "^3.2.1",
     "typescript": "~1.7.3"

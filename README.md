@@ -2,6 +2,7 @@
 [![npm version](https://img.shields.io/npm/v/angular2-cloudtasks.svg?style=flat)](https://www.npmjs.com/package/angular2-cloudtasks)
 [![Build Status](https://img.shields.io/travis/twbs/angular2-cloudtasks/master.svg?style=flat)](https://travis-ci.org/Cloudtasks/angular2-cloudtasks)
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/bafd522f82da48fda8bb25bee689b32f)](https://www.codacy.com/app/jonnybgod/angular2-cloudtasks)
+[![Coverage Status](https://coveralls.io/repos/Cloudtasks/angular2-cloudtasks/badge.svg?branch=master&service=github)](https://coveralls.io/github/Cloudtasks/angular2-cloudtasks?branch=master)
 
 [![Github Releases](https://img.shields.io/github/downloads/Cloudtasks/angular2-cloudtasks/latest/total.svg)]()
 
