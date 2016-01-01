@@ -78,20 +78,18 @@ export class AppComponent {
 - `getSettings()`: Gets the settings
 
 ### CloudtasksDirective
-- `ctSrc`: (required) Sets original image url
-- `ctOptions`: (optional) Sets options for image processing ([Docs](https://cloudtasks.io/docs/image/#image))
-- `ctDefaultImage`: (optional) Sets default image url to be used as fallback and while waiting for original image
-- `ctSize`: (optional) Sets size for image processing (if not set we will try to check the best size automatically)
-- `ctForceSize`: (optional) Forces the exact size for image processing
+- `ctSrc`: (string) (required) Sets original image url
+- `ctOptions`: (object) (optional) Sets options for image processing ([Docs](https://cloudtasks.io/docs/image/#image))
+- `ctDefaultImage`: (string) (optional) Sets default image url to be used as fallback and while waiting for original image
+- `ctSize`: (string) (optional) Sets size for image processing (if not set we will try to check the best size automatically)
+- `ctForceSize`: (boolean) (optional) Forces the exact size for image processing
 
 Example:
 ```html
-<img [ctSrc]="{{imgUrl}}" [ctSize]="800x600" [ctOptions]="{trim: true, smart: 'face', filters: 'blur(10):flip()'}" [ctDefaultImage]="http://example.com/defaultImage.jpg" [ctForceSize]="true">
+<img [ctSrc]="'{{imgUrl}}'" [ctSize]="'800x600'" [ctOptions]="{trim: true, smart: 'face', filters: 'blur(10):flip()'}" [ctDefaultImage]="'http://example.com/defaultImage.jpg'" [ctForceSize]="true">
 ```
 
 ## TODO
-
-- Missing directive tests
 - WebWorker Support (MessageBus)
 
 ## License

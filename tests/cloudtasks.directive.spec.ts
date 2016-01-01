@@ -26,17 +26,56 @@ export function main() {
 	  class TestComponent {
 	  	constructor(cloudtasks: CloudtasksService) {
 				cloudtasks.setId('YOUR_CLIENT_ID');
-				cloudtasks.settings.options = {};
 			}
 	  }
 
 		it('should set img src', injectAsync([TestComponentBuilder], (tcb: any) => {
-			return tcb.overrideTemplate(TestComponent, `<img [ctSrc]="'http://example.com/image.jpg'" [ctOptions]="{trim: true}" [ctSize]="'origxorig'">`)
+			return tcb.overrideTemplate(TestComponent, `<img [ctSrc]="'http://example.com/image.jpg'" [ctOptions]="{trim: true}" [ctSize]="'origxorig'"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
         	let compiled = fixture.debugElement.nativeElement.children[0];
 
-					expect(compiled.src).toBe('http://images.cloudtasks.io/YOUR_CLIENT_ID/trim/origxorig/http%3A%2F%2Fexample.com%2Fimage.jpg');
+					expect(compiled.src).toMatch(/\/\/images.cloudtasks.io\/YOUR_CLIENT_ID/);
+				});
+		}));
+
+		it('should detect element size', injectAsync([TestComponentBuilder], (tcb: any) => {
+			return tcb.overrideTemplate(TestComponent, `<img [ctSrc]="'http://example.com/image.jpg'" style="width: 800px; height: 600px"/>`)
+				.createAsync(TestComponent).then((fixture: any) => {
+					fixture.detectChanges();
+        	let compiled = fixture.debugElement.nativeElement.children[0];
+
+					expect(compiled.src).toMatch(/800x600/);
+				});
+		}));
+
+		it('should force size', injectAsync([TestComponentBuilder], (tcb: any) => {
+			return tcb.overrideTemplate(TestComponent, `<img [ctSrc]="'http://example.com/image.jpg'" style="width: 823px; height: 312px" [ctForceSize]="true"/>`)
+				.createAsync(TestComponent).then((fixture: any) => {
+					fixture.detectChanges();
+        	let compiled = fixture.debugElement.nativeElement.children[0];
+
+					expect(compiled.src).toMatch(/823x312/);
+				});
+		}));
+
+		it('should pass options', injectAsync([TestComponentBuilder], (tcb: any) => {
+			return tcb.overrideTemplate(TestComponent, `<img [ctSrc]="'http://example.com/image.jpg'" [ctOptions]="{trim: true}"/>`)
+				.createAsync(TestComponent).then((fixture: any) => {
+					fixture.detectChanges();
+        	let compiled = fixture.debugElement.nativeElement.children[0];
+
+					expect(compiled.src).toMatch(/trim/);
+				});
+		}));
+		
+		it('should set default image', injectAsync([TestComponentBuilder], (tcb: any) => {
+			return tcb.overrideTemplate(TestComponent, `<img [ctSrc]="'http://example.com/image.jpg'" [ctDefaultImage]="'http://example.com/defaultImage.jpg'"/>`)
+				.createAsync(TestComponent).then((fixture: any) => {
+					fixture.detectChanges();
+        	let compiled = fixture.debugElement.nativeElement.children[0];
+
+					expect(compiled.style['background-image']).toMatch(/defaultImage/);
 				});
 		}));
 	});
