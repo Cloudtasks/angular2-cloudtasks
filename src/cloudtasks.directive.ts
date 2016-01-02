@@ -1,5 +1,4 @@
-import {Directive, Injectable, ElementRef, Renderer, Input, OnInit, AfterViewChecked} from 'angular2/core';
-//import {MessageBus} from 'angular2/web_worker/worker';
+import {Directive, Injectable, ElementRef, Renderer, Input, OnInit, AfterViewInit} from 'angular2/core';
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 import {Ruler} from 'angular2/src/platform/browser/ruler';
 import {CloudtasksService} from './cloudtasks.service';
@@ -11,10 +10,10 @@ import {CloudtasksService} from './cloudtasks.service';
 		'(error)': 'onError()'
 	}
 })
-export class CloudtasksDirective implements OnInit, AfterViewChecked {
+export class CloudtasksDirective implements OnInit, AfterViewInit {
 	@Input('ctSrc') imageSource: string;
 	@Input() ctOptions: any;
-	@Input() ctDefaultImage: string;
+	@Input() ctPlaceholderImage: string;
 	@Input() ctSize: string;
 	@Input() ctForceSize: boolean;
 
@@ -27,6 +26,8 @@ export class CloudtasksDirective implements OnInit, AfterViewChecked {
 	private width: number;
 	private height: number;
 	private optionsString: string = '/';
+
+	private tries: number = 0;
 
 	cloudtasks: CloudtasksService;
 
@@ -57,7 +58,7 @@ export class CloudtasksDirective implements OnInit, AfterViewChecked {
 
 	}
 
-	ngAfterViewChecked() {
+	ngAfterViewInit() {
 		this.parseOptions();
 
 		if (this.ctSize) {
@@ -74,32 +75,47 @@ export class CloudtasksDirective implements OnInit, AfterViewChecked {
 	}
 
 	init() {
-		if (this.ctDefaultImage || this.settings.defaultImage) {
+		if (this.ctPlaceholderImage || this.settings.placeholderImage) {
 			this.renderer.setElementStyle(this.el, 'background-image', 'url(//'+ this.getDefaultURL() +')');
 		}
-
+		console.log('init');
 		this.renderer.setElementAttribute(this.el, 'src', this.getURL());
 	}
 
 	onError() {
-		if (this.ctDefaultImage || this.settings.defaultImage) {
-			this.renderer.setElementAttribute(this.el, 'src', this.getDefaultURL());
+		if (this.tries === 0) {
+			this.tries += 1;
+			if (this.ctPlaceholderImage || this.settings.placeholderImage) {
+				this.renderer.setElementAttribute(this.el, 'src', this.getDefaultURL());
+			}
+		} else if (this.tries === 1) {
+			this.tries += 1;
+			this.renderer.setElementAttribute(this.el, 'src', this.getErrorURL());
 		}
 	}
 
 	getURL(): string {
 		return '//'+ (this.settings.dev ? 'dev-' : '') +'images.cloudtasks.io/'+
-		this.settings.clientId +
-		this.optionsString +
-		this.getSize() +'/'+
-		encodeURIComponent(decodeURIComponent(this.imageSource));
+			this.settings.clientId +
+			this.optionsString +
+			this.getSize() +'/'+
+			encodeURIComponent(decodeURIComponent(this.imageSource));
 	}
 
 	getDefaultURL(): string {
 		return '//'+ (this.settings.dev ? 'dev-' : '') +'images.cloudtasks.io/'+
-		this.settings.clientId +'/'+
-		this.getSize() +'/'+
-		encodeURIComponent(decodeURIComponent((this.ctDefaultImage || this.settings.defaultImage)));
+			this.settings.clientId +'/'+
+			this.optionsString +
+			this.getSize() +'/'+
+			encodeURIComponent(decodeURIComponent((this.ctPlaceholderImage || this.settings.placeholderImage)));
+	}
+
+	getErrorURL(): string {
+		return '//'+ (this.settings.dev ? 'dev-' : '') +'images.cloudtasks.io/'+
+			this.settings.clientId +'/'+
+			this.optionsString +
+			this.getSize() +'/'+
+			encodeURIComponent(decodeURIComponent('https://cloudtasks.ctcdn.co/images/cloudtasks_fill_blue-512x512.png'));
 	}
 
 	getSize(): string {
@@ -153,6 +169,8 @@ export class CloudtasksDirective implements OnInit, AfterViewChecked {
 			options = Object.assign(options, eval(this.ctOptions));
 		}
 
+		let optionsString = '/';
+
 		for (let key in options) {
 			if (!options.hasOwnProperty(key)) {
 				continue;
@@ -162,11 +180,13 @@ export class CloudtasksDirective implements OnInit, AfterViewChecked {
 
 			if (value) {
 				if (typeof value === 'string') {
-					this.optionsString = this.optionsString + key +':'+ value +'/';
+					optionsString = optionsString + key +':'+ value +'/';
 				} else {
-					this.optionsString = this.optionsString + key +'/';
+					optionsString = optionsString + key +'/';
 				}
 			}
 		}
+
+		this.optionsString = optionsString;
 	}
 }

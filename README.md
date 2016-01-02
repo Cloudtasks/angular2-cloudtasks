@@ -58,9 +58,11 @@ export class AppComponent {
 		cloudtasks.setId('YOUR_CLIENT_ID');
 
 		// Optional: set global options
-		cloudtasks.settings.options.trim = false;
+		cloudtasks.settings.options = {
+			trim: false
+		}
 		// Optional: set global settings
-		cloudtasks.settings.defaultImage = "http://example.com/defaultImage.jpg";
+		cloudtasks.settings.placeholderImage = "http://example.com/placeholderImage.jpg";
 	}
 }
 ```
@@ -73,6 +75,7 @@ export class AppComponent {
 - `options`: (object) Global options for image processing ([Docs](https://cloudtasks.io/docs/image/#image))
 - `photoWidths`: (array) Array of 'Ints' to be used for width approximation calculation
 - `photoHeights`: (array) Array of 'Ints' to be used for height approximation calculation
+- `placeholderImage`: (string) Set global placeholder image url to be used while waiting for original image (default: '')
 	
 #### Methods:
 - `setId(id: string)`: Sets the client id
@@ -81,13 +84,13 @@ export class AppComponent {
 ### CloudtasksDirective
 - `ctSrc`: (string) (required) Sets original image url
 - `ctOptions`: (object) (optional) Sets options for image processing ([Docs](https://cloudtasks.io/docs/image/#image))
-- `ctDefaultImage`: (string) (optional) Sets default image url to be used as fallback and while waiting for original image
+- `ctPlaceholderImage`: (string) (optional) Sets placeholder image url to be used while waiting for original image
 - `ctSize`: (string) (optional) Sets size for image processing (if not set we will try to check the best size automatically)
 - `ctForceSize`: (boolean) (optional) Forces the exact size for image processing
 
 Example:
 ```html
-<img [ctSrc]="'{{imgUrl}}'" [ctSize]="'800x600'" [ctOptions]="{trim: true, smart: 'face', filters: 'blur(10):flip()'}" [ctDefaultImage]="'http://example.com/defaultImage.jpg'" [ctForceSize]="true">
+<img [ctSrc]="'{{imgUrl}}'" [ctSize]="'800x600'" [ctOptions]="{trim: true, smart: 'face', filters: 'blur(10):flip()'}" [ctPlaceholderImage]="'http://example.com/placeholderImage.jpg'" [ctForceSize]="true">
 ```
 
 ## TODO

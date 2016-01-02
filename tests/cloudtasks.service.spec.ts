@@ -22,6 +22,11 @@ export function main() {
 			expect(service.settings.dev).toBe(true);
 		});
 
+		it('changes service settings placeholder image', () => {
+			service.settings.placeholderImage = 'http://example.com/placeholderImage.jpg';
+			expect(service.settings.placeholderImage).toBe('http://example.com/placeholderImage.jpg');
+		});
+
 		it('gets service settings', () => {
 			var settings = service.getSettings();
 			expect(settings.dev).toBe(false);

@@ -86,14 +86,14 @@ export function main() {
 				});
 		})));
 		
-		it('should set default image', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
-			return tcb.overrideTemplate(TestComponent, `<img [ctSrc]="'http://example.com/image.jpg'" [ctDefaultImage]="'http://example.com/defaultImage.jpg'"/>`)
+		it('should set placeholder image', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
+			return tcb.overrideTemplate(TestComponent, `<img [ctSrc]="'http://example.com/image.jpg'" [ctPlaceholderImage]="'http://example.com/placeholderImage.jpg'"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
 					let compiled = fixture.debugElement.nativeElement.children[0];
 					
 					tick();
-					expect(compiled.style['background-image']).toMatch(/defaultImage/);
+					expect(compiled.style['background-image']).toMatch(/placeholderImage/);
 				});
 		})));
 	});
