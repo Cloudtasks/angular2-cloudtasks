@@ -78,7 +78,7 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 		if (this.ctPlaceholderImage || this.settings.placeholderImage) {
 			this.renderer.setElementStyle(this.el, 'background-image', 'url(//'+ this.getDefaultURL() +')');
 		}
-		console.log('init');
+		
 		this.renderer.setElementAttribute(this.el, 'src', this.getURL());
 	}
 
