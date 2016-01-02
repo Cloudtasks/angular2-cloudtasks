@@ -3,34 +3,32 @@
   "name": "angular2-cloudtasks",
   "description": "Allows you to serve highly optimized images to your client apps.",
   "homepage": "https://cloudtasks.io",
-  "dependencies": {
-    "angular2": "~2.0.0-beta.0",
-    "es6-promise": "^3.0.2",
-    "es6-shim": "^0.33.3",
-    "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.0",
-    "zone.js": "~0.5.10"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "angular2": "~2.0.0-beta.0",
     "commitizen": "~2.4.6",
     "cz-conventional-changelog": "~1.1.4",
+    "es6-promise": "^3.0.2",
+    "es6-shim": "^0.33.3",
     "jasmine-core": "~2.3.4",
     "karma": "~0.13.15",
     "karma-chrome-launcher": "~0.2.2",
     "karma-firefox-launcher": "~0.1.7",
     "karma-jasmine": "~0.3.6",
     "karma-typescript-preprocessor": "0.0.21",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.0",
     "semantic-release": "^4.3.5",
     "systemjs": "~0.19.6",
     "tslint": "^3.2.1",
-    "typescript": "~1.7.3"
+    "typescript": "~1.7.3",
+    "zone.js": "~0.5.10"
   },
   "scripts": {
     "lint": "tslint ./angular2-cloudtasks.ts ./src/cloudtasks.directive.ts ./src/cloudtasks.service.ts",
     "test": "tsc && karma start",
     "commit": "git-cz",
     "prepublish": "tsc",
-    "postinstall": "tsd reinstall --clean && tsd link && tsd rebundle",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "main": "angular2-cloudtasks.js",
