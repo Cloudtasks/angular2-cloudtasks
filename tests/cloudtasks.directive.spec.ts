@@ -38,6 +38,7 @@ export function main() {
 					let compiled = fixture.debugElement.nativeElement.children[0];
 
 					tick();
+					fixture.detectChanges();
 					expect(compiled.src).toMatch(/\/\/images.cloudtasks.io\/YOUR_CLIENT_ID/);
 				});
 		})));
@@ -49,6 +50,7 @@ export function main() {
 					let compiled = fixture.debugElement.nativeElement.children[0];
 
 					tick();
+					fixture.detectChanges();
 					expect(compiled.src).toMatch(/800x600/);
 				});
 		})));
@@ -60,6 +62,7 @@ export function main() {
 					let compiled = fixture.debugElement.nativeElement.querySelector('img');
 
 					tick();
+					fixture.detectChanges();
 					expect(compiled.src).toMatch(/800x600/);
 				});
 		})));*/
@@ -71,6 +74,7 @@ export function main() {
 					let compiled = fixture.debugElement.nativeElement.children[0];
 
 					tick();
+					fixture.detectChanges();
 					expect(compiled.src).toMatch(/823x312/);
 				});
 		})));
@@ -82,6 +86,7 @@ export function main() {
 					let compiled = fixture.debugElement.nativeElement.children[0];
 
 					tick();
+					fixture.detectChanges();
 					expect(compiled.src).toMatch(/trim/);
 				});
 		})));
@@ -93,6 +98,7 @@ export function main() {
 					let compiled = fixture.debugElement.nativeElement.children[0];
 					
 					tick();
+					fixture.detectChanges();
 					expect(compiled.style['background-image']).toMatch(/placeholderImage/);
 				});
 		})));

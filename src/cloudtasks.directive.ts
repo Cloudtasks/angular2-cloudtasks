@@ -17,6 +17,7 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 	@Input() ctSize: string;
 	@Input() ctForceSize: boolean;
 
+	private elRef: ElementRef;
 	private el: ElementRef;
 	private renderer: Renderer;
 
@@ -32,11 +33,12 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 	cloudtasks: CloudtasksService;
 
 	constructor(
-		el: ElementRef,
+		elRef: ElementRef,
 		renderer: Renderer,
 		cloudtasks: CloudtasksService
 	) {
-		this.el = el;
+		this.elRef = elRef;
+		this.el = elRef.nativeElement;
 		this.renderer = renderer;
 
 		this.cloudtasks = cloudtasks;
@@ -53,7 +55,7 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 		}
 
 		if (this.imageSource.indexOf('http') === -1) {
-			this.imageSource = window.location.protocol +':'+ this.imageSource;
+			this.imageSource = window.location.protocol + this.imageSource;
 		}
 
 	}
@@ -64,12 +66,28 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 		if (this.ctSize) {
 			this.init();
 		} else {
-			new Ruler(DOM).measure(this.el)
+			new Ruler(DOM).measure(this.elRef)
 				.then((rect: any) => {
 					this.width = rect.width;
 					this.height = rect.height;
 
 					this.init();
+
+					/*console.log(DOM.parentElement(this.el));
+					console.log(this.elRef);
+					console.log(this.elRef.parent);
+					if (!this.width && !this.height) {
+						new Ruler(DOM).measure(this.elRef)
+							.then((rect: any) => {
+								console.log('parent: ', rect);
+								this.width = rect.width;
+								this.height = rect.height;
+
+								this.init();
+							});
+					} else {
+						this.init();
+					}*/
 				});
 		}
 	}
@@ -78,7 +96,7 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 		if (this.ctPlaceholderImage || this.settings.placeholderImage) {
 			this.renderer.setElementStyle(this.el, 'background-image', 'url(//'+ this.getDefaultURL() +')');
 		}
-		
+
 		this.renderer.setElementAttribute(this.el, 'src', this.getURL());
 	}
 
