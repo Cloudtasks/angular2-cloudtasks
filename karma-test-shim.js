@@ -1,7 +1,7 @@
 // Turn on full stack traces in errors to help debugging
 Error.stackTraceLimit=Infinity;
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 100;
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
 
 // Cancel Karma's synchronous start,
 // we will call `__karma__.start()` later, once all the specs are loaded.
@@ -27,8 +27,11 @@ System.config({
 	}
 });
 
-System.import('angular2/src/platform/browser/browser_adapter').then(function(browser_adapter) {
-	browser_adapter.BrowserDomAdapter.makeCurrent();
+System.import('angular2/testing').then(function(testing) {
+  return System.import('angular2/platform/testing/browser').then(function(testing_platform_browser) {
+    testing.setBaseTestProviders(testing_platform_browser.TEST_BROWSER_PLATFORM_PROVIDERS,
+                                 testing_platform_browser.TEST_BROWSER_APPLICATION_PROVIDERS);
+  });
 }).then(function() {
 		return Promise.all(
 			Object.keys(window.__karma__.files) // All files served by Karma.
