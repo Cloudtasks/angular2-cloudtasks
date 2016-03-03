@@ -17,6 +17,8 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 	@Input() ctSize: string;
 	@Input() ctForceSize: boolean;
 
+	private cloudtasks: CloudtasksService;
+
 	private elRef: ElementRef;
 	private el: ElementRef;
 	private renderer: Renderer;
@@ -29,8 +31,6 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 	private optionsString: string = '/';
 
 	private tries: number = 0;
-
-	cloudtasks: CloudtasksService;
 
 	constructor(
 		elRef: ElementRef,

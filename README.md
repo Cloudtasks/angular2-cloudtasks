@@ -3,6 +3,7 @@
 [![Build Status](https://img.shields.io/travis/Cloudtasks/angular2-cloudtasks/master.svg?style=flat)](https://travis-ci.org/Cloudtasks/angular2-cloudtasks)
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/bafd522f82da48fda8bb25bee689b32f)](https://www.codacy.com/app/jonnybgod/angular2-cloudtasks)
 [![Coverage Status](https://coveralls.io/repos/Cloudtasks/angular2-cloudtasks/badge.svg?branch=master&service=github)](https://coveralls.io/github/Cloudtasks/angular2-cloudtasks?branch=master)
+[![devDependency Status](https://david-dm.org/Cloudtasks/angular2-cloudtasks/dev-status.svg)](https://david-dm.org/Cloudtasks/angular2-cloudtasks#info=devDependencies)
 
 [![Github Releases](https://img.shields.io/github/downloads/Cloudtasks/angular2-cloudtasks/latest/total.svg)]()
 
