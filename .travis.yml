@@ -9,7 +9,7 @@ node_js:
   - '5'
 install:
   - npm install
-  - npm run install:typings
+  - ./node_modules/.bin/typings install
 before_script:
   - export CHROME_BIN=chromium-browser
   - export DISPLAY=:99.0
