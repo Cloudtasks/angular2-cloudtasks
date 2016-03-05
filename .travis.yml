@@ -7,7 +7,8 @@ notifications:
   email: false
 node_js:
   - '5'
-after_install:
+install:
+  - npm install
   - npm run install:typings
 before_script:
   - export CHROME_BIN=chromium-browser
