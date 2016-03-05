@@ -29,7 +29,7 @@
     "lint": "tslint ./angular2-cloudtasks.ts ./src/cloudtasks.directive.ts ./src/cloudtasks.service.ts",
     "test": "karma start",
     "commit": "git-cz",
-    "prepublish": "tsc",
+    "prepublish": "./node_modules/.bin/typings install && tsc",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "main": "angular2-cloudtasks.js",

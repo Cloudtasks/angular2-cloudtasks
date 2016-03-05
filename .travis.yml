@@ -7,9 +7,6 @@ notifications:
   email: false
 node_js:
   - '5'
-install:
-  - npm install
-  - ./node_modules/.bin/typings install
 before_script:
   - export CHROME_BIN=chromium-browser
   - export DISPLAY=:99.0
