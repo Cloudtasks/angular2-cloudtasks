@@ -25,6 +25,7 @@
     "zone.js": "~0.5.15"
   },
   "scripts": {
+    "install:typings": "./node_modules/.bin/typings install",
     "lint": "tslint ./angular2-cloudtasks.ts ./src/cloudtasks.directive.ts ./src/cloudtasks.service.ts",
     "test": "karma start",
     "commit": "git-cz",
