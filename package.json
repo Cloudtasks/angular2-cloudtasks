@@ -23,7 +23,7 @@
     "tslint": "^3.2.1",
     "typescript": "~1.8.7",
     "typings": "^0.6.10",
-    "zone.js": "~0.5.15"
+    "zone.js": "~0.6.6"
   },
   "scripts": {
     "lint": "tslint ./angular2-cloudtasks.ts ./src/cloudtasks.directive.ts ./src/cloudtasks.service.ts",
