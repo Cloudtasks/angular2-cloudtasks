@@ -9,7 +9,7 @@ import {
   tick
 } from 'angular2/testing';
 
-import {Component, View} from 'angular2/core';
+import {Component} from 'angular2/core';
 
 import {CloudtasksService} from '../src/cloudtasks.service';
 import {CloudtasksDirective} from '../src/cloudtasks.directive';
@@ -19,9 +19,7 @@ export function main() {
 		// Create a test component to test directives
 		@Component({
 			selector: 'TestComponent',
-			providers: [CloudtasksService]
-		})
-		@View({
+			providers: [CloudtasksService],
 			template: ``,
 			directives: [CloudtasksDirective]
 		})

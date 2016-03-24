@@ -5,11 +5,10 @@
   "homepage": "https://cloudtasks.io",
   "dependencies": {},
   "devDependencies": {
-    "angular2": "~2.0.0-beta.8",
+    "angular2": "~2.0.0-beta.12",
     "commitizen": "~2.5.0",
     "cz-conventional-changelog": "~1.1.4",
-    "es6-promise": "^3.0.2",
-    "es6-shim": "^0.33.3",
+    "es6-shim": "^0.35.0",
     "jasmine-core": "~2.4.1",
     "karma": "~0.13.21",
     "karma-chrome-launcher": "~0.2.2",
@@ -23,7 +22,7 @@
     "tslint": "^3.2.1",
     "typescript": "~1.8.7",
     "typings": "^0.6.10",
-    "zone.js": "~0.5.15"
+    "zone.js": "~0.6.6"
   },
   "scripts": {
     "lint": "tslint ./angular2-cloudtasks.ts ./src/cloudtasks.directive.ts ./src/cloudtasks.service.ts",
