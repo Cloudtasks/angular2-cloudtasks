@@ -1,11 +1,13 @@
 import {Directive, Injectable, ElementRef, Renderer, Input, OnInit, AfterViewInit} from 'angular2/core';
-import {DOM} from 'angular2/src/platform/dom/dom_adapter';
-import {Ruler} from 'angular2/src/platform/browser/ruler';
+import {BrowserDomAdapter} from 'angular2/platform/browser';
 import {CloudtasksService} from './cloudtasks.service';
 
 @Injectable()
 @Directive({
 	selector: '[ctSrc]',
+	providers: [
+		BrowserDomAdapter
+	],
 	host: {
 		'(error)': 'onError()'
 	}
@@ -17,13 +19,7 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 	@Input() ctSize: string;
 	@Input() ctForceSize: boolean;
 
-	private cloudtasks: CloudtasksService;
-
-	private elRef: ElementRef;
 	private el: ElementRef;
-	private renderer: Renderer;
-
-	//private bus: MessageBus;
 
 	private settings: any;
 	private width: number;
@@ -33,16 +29,14 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 	private tries: number = 0;
 
 	constructor(
-		elRef: ElementRef,
-		renderer: Renderer,
-		cloudtasks: CloudtasksService
+		private DOM: BrowserDomAdapter,
+		private elRef: ElementRef,
+		private renderer: Renderer,
+		private cloudtasks: CloudtasksService
 	) {
-		this.elRef = elRef;
-		this.el = elRef.nativeElement;
-		this.renderer = renderer;
+		this.el = this.elRef.nativeElement;
 
-		this.cloudtasks = cloudtasks;
-		this.settings = cloudtasks.getSettings();
+		this.settings = this.cloudtasks.getSettings();
 	}
 
 	ngOnInit() {
@@ -66,29 +60,19 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 		if (this.ctSize) {
 			this.init();
 		} else {
-			new Ruler(DOM).measure(this.elRef)
-				.then((rect: any) => {
-					this.width = rect.width;
-					this.height = rect.height;
+			var rect = this.DOM.getBoundingClientRect(this.el);
+			this.width = rect.width;
+			this.height = rect.height;
 
-					this.init();
+			if (!this.width && !this.height) {
+				rect = this.DOM.getBoundingClientRect(this.DOM.parentElement(this.el));
+				this.width = rect.width;
+				this.height = rect.height;
 
-					/*console.log(DOM.parentElement(this.el));
-					console.log(this.elRef);
-					console.log(this.elRef.parent);
-					if (!this.width && !this.height) {
-						new Ruler(DOM).measure(this.elRef)
-							.then((rect: any) => {
-								console.log('parent: ', rect);
-								this.width = rect.width;
-								this.height = rect.height;
-
-								this.init();
-							});
-					} else {
-						this.init();
-					}*/
-				});
+				this.init();
+			} else {
+				this.init();
+			}
 		}
 	}
 
