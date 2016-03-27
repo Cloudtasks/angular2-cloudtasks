@@ -30,7 +30,7 @@ export function main() {
 		}
 
 		it('should set img src', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
-			return tcb.overrideTemplate(TestComponent, `<img [ctSrc]="'http://example.com/image.jpg'" [ctOptions]="{trim: true}" [ctSize]="'origxorig'"/>`)
+			return tcb.overrideTemplate(TestComponent, `<img ctSrc="http://example.com/image.jpg" [ctOptions]="{trim: true}" ctSize="origxorig"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
 					let compiled = fixture.debugElement.nativeElement.children[0];
@@ -42,7 +42,7 @@ export function main() {
 		})));
 
 		it('should detect element size', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
-			return tcb.overrideTemplate(TestComponent, `<img [ctSrc]="'http://example.com/image.jpg'" style="width: 800px; height: 600px"/>`)
+			return tcb.overrideTemplate(TestComponent, `<img ctSrc="http://example.com/image.jpg" style="width: 800px; height: 600px"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
 					let compiled = fixture.debugElement.nativeElement.children[0];
@@ -54,7 +54,7 @@ export function main() {
 		})));
 
 		it('should detect parent element size', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
-			return tcb.overrideTemplate(TestComponent, `<div style="width: 800px; height: 600px"><img [ctSrc]="'http://example.com/image.jpg'"/></div>`)
+			return tcb.overrideTemplate(TestComponent, `<div style="width: 800px; height: 600px"><img ctSrc="http://example.com/image.jpg"/></div>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
 					let compiled = fixture.debugElement.nativeElement.querySelector('img');
@@ -66,7 +66,7 @@ export function main() {
 		})));
 
 		it('should force size', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
-			return tcb.overrideTemplate(TestComponent, `<img [ctSrc]="'http://example.com/image.jpg'" style="width: 823px; height: 312px" [ctForceSize]="true"/>`)
+			return tcb.overrideTemplate(TestComponent, `<img ctSrc="http://example.com/image.jpg" style="width: 823px; height: 312px" ctForceSize="true"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
 					let compiled = fixture.debugElement.nativeElement.children[0];
@@ -78,7 +78,7 @@ export function main() {
 		})));
 
 		it('should pass options', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
-			return tcb.overrideTemplate(TestComponent, `<img [ctSrc]="'http://example.com/image.jpg'" [ctOptions]="{trim: true}"/>`)
+			return tcb.overrideTemplate(TestComponent, `<img ctSrc="http://example.com/image.jpg" [ctOptions]="{trim: true}"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
 					let compiled = fixture.debugElement.nativeElement.children[0];
@@ -90,7 +90,7 @@ export function main() {
 		})));
 		
 		it('should set placeholder image', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
-			return tcb.overrideTemplate(TestComponent, `<img [ctSrc]="'http://example.com/image.jpg'" [ctPlaceholderImage]="'http://example.com/placeholderImage.jpg'"/>`)
+			return tcb.overrideTemplate(TestComponent, `<img ctSrc="http://example.com/image.jpg" ctPlaceholderImage="http://example.com/placeholderImage.jpg"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
 					let compiled = fixture.debugElement.nativeElement.children[0];

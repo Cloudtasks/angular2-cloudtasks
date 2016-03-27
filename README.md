@@ -89,7 +89,7 @@ export class AppComponent {
 
 Example:
 ```html
-<img [ctSrc]="'{{imgUrl}}'" [ctSize]="'800x600'" [ctOptions]="{trim: true, smart: 'face', filters: 'blur(10):flip()'}" [ctPlaceholderImage]="'http://example.com/placeholderImage.jpg'" [ctForceSize]="true">
+<img [ctSrc]="'{{imgUrl}}'" ctSize="800x600" [ctOptions]="{trim: true, smart: 'face', filters: 'blur(10):flip()'}" ctPlaceholderImage="http://example.com/placeholderImage.jpg" ctForceSize="true">
 ```
 
 ## License
