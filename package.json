@@ -6,8 +6,8 @@
   "dependencies": {},
   "devDependencies": {
     "angular2": "~2.0.0-beta.12",
-    "commitizen": "~2.5.0",
-    "cz-conventional-changelog": "~1.1.4",
+    "commitizen": "~2.7.3",
+    "cz-conventional-changelog": "~1.1.5",
     "es6-shim": "^0.35.0",
     "jasmine-core": "~2.4.1",
     "karma": "~0.13.21",

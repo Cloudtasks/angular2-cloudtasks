@@ -42,14 +42,12 @@ bootstrap(AppComponent, [
 ]);
 
 
-import {Component, View, Injectable} from 'angular2/angular2';
+import {Component, Injectable} from 'angular2/angular2';
 import {CloudtasksService, CloudtasksDirective} from 'angular2-cloudtasks/angular2-cloudtasks';
 
 @Injectable()
 @Component({
-	selector: 'app'
-})
-@View({
+	selector: 'app',
 	template: `<img [ctSrc]="'http://example.com/image.jpg'" [ctOptions]="{trim: true, smart: 'face', filters: 'blur(10):flip()'}">`,
 	directives: [CloudtasksDirective]
 })
