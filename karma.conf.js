@@ -26,9 +26,9 @@ module.exports = function(config) {
 			{ pattern: 'node_modules/angular2/**/*.js', included: false, watched: false, served: true },
 			{ pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false, served: true },
 			{ pattern: 'node_modules/systemjs/dist/system-polyfills.js', included: false, watched: false, served: true }, // PhantomJS2 (and possibly others) might require it
+			//{ pattern: 'node_modules/immutable/dist/immutable.js', included: true, watched: true },
 
 			{ pattern: 'src/**/*.ts', included: false, watched: true }, // source files
-			{ pattern: 'tests/**/*.ts', included: false, watched: true }, // test files
 
 			'karma-test-shim.js'
 		],
@@ -43,7 +43,23 @@ module.exports = function(config) {
 		},
 
 		typescriptPreprocessor: {
-			options: require('./tsconfig.json').compilerOptions,
+			options: {
+				"target": "es5",
+		    "module": "commonjs",
+		    "declaration": false,
+		    "removeComments": true,
+		    "noLib": false,
+		    "emitDecoratorMetadata": true,
+		    "experimentalDecorators": true,
+		    "sourceMap": false,
+		    "pretty": true,
+		    "allowUnreachableCode": false,
+		    "allowUnusedLabels": false,
+		    "noImplicitAny": true,
+		    "noImplicitReturns": false,
+		    "noImplicitUseStrict": false,
+		    "noFallthroughCasesInSwitch": true
+			},
 			typings: [
 				"typings/browser.d.ts"
 			]

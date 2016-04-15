@@ -39,3 +39,12 @@ Desktop.ini
 
 # Mac crap
 .DS_Store
+
+# Misc Project
+*.yml
+karma*
+typings
+tsconfig.json
+tslint.json
+typings.json
+src

@@ -35,7 +35,7 @@ It is recommended to instantiate `CloudtasksService` in the bootstrap of your ap
 If you add it to the "providers" property of a component it will instantiate a new instance of the service that won't be initialized.
 
 ```js
-import {CloudtasksService} from 'angular2-cloudtasks/angular2-cloudtasks';
+import {CloudtasksService} from 'angular2-cloudtasks';
 
 bootstrap(AppComponent, [
 	CloudtasksService
@@ -43,7 +43,7 @@ bootstrap(AppComponent, [
 
 
 import {Component, Injectable} from 'angular2/angular2';
-import {CloudtasksService, CloudtasksDirective} from 'angular2-cloudtasks/angular2-cloudtasks';
+import {CloudtasksService, CloudtasksDirective} from 'angular2-cloudtasks';
 
 @Injectable()
 @Component({

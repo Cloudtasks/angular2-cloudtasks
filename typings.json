@@ -1,9 +1,11 @@
 {
   "name": "angular2-cloudtasks",
-  "dependencies": {},
   "devDependencies": {},
   "ambientDependencies": {
     "es6-shim": "github:DefinitelyTyped/DefinitelyTyped/es6-shim/es6-shim.d.ts#4de74cb527395c13ba20b438c3a7a419ad931f1c",
-    "jasmine": "github:DefinitelyTyped/DefinitelyTyped/jasmine/jasmine.d.ts#4b36b94d5910aa8a4d20bdcd5bd1f9ae6ad18d3c"
+    "jasmine": "github:DefinitelyTyped/DefinitelyTyped/jasmine/jasmine.d.ts#4b36b94d5910aa8a4d20bdcd5bd1f9ae6ad18d3c",
+    "zone.js": "github:gdi2290/typed-zone.js/lib/zone.d.ts#225aa313388bdf78b18ed9f0b29f93a395146229"
+  },
+  "dependencies": {
   }
 }

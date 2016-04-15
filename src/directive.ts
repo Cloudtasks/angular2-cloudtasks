@@ -1,6 +1,6 @@
 import {Directive, Injectable, ElementRef, Renderer, Input, OnInit, AfterViewInit} from 'angular2/core';
 import {BrowserDomAdapter} from 'angular2/platform/browser';
-import {CloudtasksService} from './cloudtasks.service';
+import {CloudtasksService} from './service';
 
 @Injectable()
 @Directive({

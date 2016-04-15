@@ -1,17 +1,28 @@
 {
 	"compilerOptions": {
-		"noImplicitAny": true,
-		"module": "commonjs",
-		"target": "ES5",
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"sourceMap": true,
-		"declaration": true,
-		"moduleResolution": "node"
+		"target": "es5",
+    "module": "commonjs",
+    "declaration": false,
+    "removeComments": true,
+    "noLib": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": false,
+    "pretty": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "noImplicitAny": true,
+    "noImplicitReturns": false,
+    "noImplicitUseStrict": false,
+    "noFallthroughCasesInSwitch": true,
+    "outDir": "./dist"
 	},
-	"exclude": [
-		"node_modules",
-    "typings/main.d.ts",
-    "typings/main"
-	]	
+	"files": [
+    "typings/browser.d.ts",
+    "src/index.ts",
+    "src/service.spec.ts",
+    "src/service.ts",
+    "src/directive.spec.ts",
+    "src/directive.ts"
+  ]
 }

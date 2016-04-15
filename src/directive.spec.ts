@@ -11,8 +11,8 @@ import {
 
 import {Component} from 'angular2/core';
 
-import {CloudtasksService} from '../src/cloudtasks.service';
-import {CloudtasksDirective} from '../src/cloudtasks.directive';
+import {CloudtasksService} from './service';
+import {CloudtasksDirective} from './directive';
 
 export function main() {
 	describe('CloudtasksDirective', () => {

@@ -5,8 +5,8 @@
   "homepage": "https://cloudtasks.io",
   "dependencies": {},
   "devDependencies": {
-    "angular2": "~2.0.0-beta.12",
-    "commitizen": "~2.7.3",
+    "angular2": "~2.0.0-beta.15",
+    "commitizen": "~2.7.2",
     "cz-conventional-changelog": "~1.1.5",
     "es6-shim": "^0.35.0",
     "jasmine-core": "~2.4.1",
@@ -20,19 +20,19 @@
     "semantic-release": "^4.3.5",
     "systemjs": "~0.19.6",
     "tslint": "^3.2.1",
-    "typescript": "~1.8.7",
-    "typings": "^0.6.10",
-    "zone.js": "~0.6.6"
+    "typescript": "~1.8.10",
+    "typings": "^0.7.12",
+    "zone.js": "~0.6.4"
   },
   "scripts": {
-    "lint": "tslint ./angular2-cloudtasks.ts ./src/cloudtasks.directive.ts ./src/cloudtasks.service.ts",
+    "lint": "./node_modules/.bin/tslint ./src/*.ts ./src/**/*.ts",
     "test": "karma start",
     "commit": "git-cz",
-    "prepublish": "./node_modules/.bin/typings install && tsc",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "build": "rm -rf ./dist/ && rm -rf ./typings/ && ./node_modules/.bin/typings install && tsc -d",
+    "semantic-release": "semantic-release pre && npm run build && npm publish && semantic-release post"
   },
-  "main": "angular2-cloudtasks.js",
-  "typings": "./angular2-cloudtasks.d.ts",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/Cloudtasks/angular2-cloudtasks.git"

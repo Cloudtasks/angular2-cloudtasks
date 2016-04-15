@@ -1,4 +1,4 @@
-import {CloudtasksService} from '../src/cloudtasks.service';
+import {CloudtasksService} from './service';
 
 export function main() {
 	describe('CloudtasksService', () => {
