@@ -41,6 +41,18 @@ export function main() {
 				});
 		})));
 
+		it('should resolve img src', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
+			return tcb.overrideTemplate(TestComponent, `<img ctSrc="image.jpg" [ctOptions]="{trim: true}" ctSize="origxorig"/>`)
+				.createAsync(TestComponent).then((fixture: any) => {
+					fixture.detectChanges();
+					let compiled = fixture.debugElement.nativeElement.children[0];
+
+					tick();
+					fixture.detectChanges();
+					expect(compiled.src).toMatch(/http%3A%2F%2Fimage.jpg/);
+				});
+		})));
+
 		it('should detect element size', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
 			return tcb.overrideTemplate(TestComponent, `<img ctSrc="http://example.com/image.jpg" style="width: 800px; height: 600px"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {

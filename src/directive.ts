@@ -48,9 +48,7 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 			throw('Cloudtasks: You need to provide an URL string on [ngSrc].');
 		}
 
-		if (this.imageSource.indexOf('http') === -1) {
-			this.imageSource = window.location.protocol + this.imageSource;
-		}
+		this.imageSource = this.resolve(this.imageSource);
 
 	}
 
@@ -109,7 +107,7 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 			this.settings.clientId +'/'+
 			this.optionsString +
 			this.getSize() +'/'+
-			encodeURIComponent(decodeURIComponent((this.ctPlaceholderImage || this.settings.placeholderImage)));
+			encodeURIComponent(decodeURIComponent(this.resolve(this.ctPlaceholderImage || this.settings.placeholderImage)));
 	}
 
 	getErrorURL(): string {
@@ -191,4 +189,72 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 
 		this.optionsString = optionsString;
 	}
+
+	resolve(url:any) {
+		var base:any = this.DOM.getBaseHref();
+
+    if('string' !== typeof url || !url) {
+      // wrong or empty url
+      return null;
+    } else if (url.match(/^[a-z]+\:\/\//i)) {
+    	// url is absolute already 
+      return url;
+    } else if (url.match(/^\/\//)) { 
+      // url is absolute already
+      return 'http:' + url;
+    } else if (url.match(/^[a-z]+\:/i)){ 
+      // data URI, mailto:, tel:, etc.
+      return url;
+    } else if('string' !== typeof base) {
+      var a:any = this.DOM.createElement('a');
+      // try to resolve url without base
+      a.href = url;
+
+      if(!a.hostname || !a.protocol || !a.pathname){ 
+        // url not valid 
+        return null;
+      }
+
+      return 'http://'+url;
+    } else { 
+    	// check base
+      base = this.resolve(base);
+
+      if (base === null) {
+      	// wrong base
+        return null;
+      }
+    }
+
+    var a:any = this.DOM.createElement('a'); 
+    a.href = base;
+
+    if (url[0] === '/') {
+    	// rooted path
+      base = [];
+    } else {
+    	// relative path
+      base = a.pathname.split('/');
+      base.pop(); 
+    }
+    url = url.split('/');
+
+    for (var i=0; i < url.length; ++i) {
+    	// current directory
+      if (url[i] === '.') {
+        continue;
+      }
+      // parent directory
+      if (url[i] === '..') {
+        if ('undefined' === typeof base.pop() || base.length === 0) {
+        	// wrong url accessing non-existing parent directories
+          return null;
+        }
+      } else {
+      	// child directory
+        base.push(url[i]); 
+      }
+    }
+    return a.protocol + '//' + a.hostname + base.join('/');
+}
 }
