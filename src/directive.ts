@@ -191,7 +191,9 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 	}
 
 	resolve(url:any) {
-		var base:any = this.DOM.getBaseHref();
+		var loc = this.DOM.getLocation().pathname.split('/');
+		loc.pop();
+		var base:any = this.DOM.getLocation().origin + loc.join('/') + '/';
 
     if('string' !== typeof url || !url) {
       // wrong or empty url
@@ -202,10 +204,7 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
     } else if (url.match(/^\/\//)) { 
       // url is absolute already
       return 'http:' + url;
-    } else if (url.match(/^[a-z]+\:/i)){ 
-      // data URI, mailto:, tel:, etc.
-      return url;
-    } else if('string' !== typeof base) {
+    } else if ('string' !== typeof base) {
       var a:any = this.DOM.createElement('a');
       // try to resolve url without base
       a.href = url;
@@ -255,6 +254,7 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
         base.push(url[i]); 
       }
     }
+
     return a.protocol + '//' + a.hostname + base.join('/');
 }
 }

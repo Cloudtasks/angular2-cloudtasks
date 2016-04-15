@@ -49,7 +49,7 @@ export function main() {
 
 					tick();
 					fixture.detectChanges();
-					expect(compiled.src).toMatch(/http%3A%2F%2Fimage.jpg/);
+					expect(compiled.src).toMatch(/http%3A%2F%2Flocalhost%2Fimage.jpg/);
 				});
 		})));
 
