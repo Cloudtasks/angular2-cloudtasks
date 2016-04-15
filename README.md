@@ -52,7 +52,7 @@ import {CloudtasksService, CloudtasksDirective} from 'angular2-cloudtasks';
 	directives: [CloudtasksDirective]
 })
 export class AppComponent {
-	constructor(cloudtasks: CloudtasksService) {
+	constructor(private cloudtasks: CloudtasksService) {
 		// Required: set your cloudtasks.io client id
 		cloudtasks.setId('YOUR_CLIENT_ID');
 
