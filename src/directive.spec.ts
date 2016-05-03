@@ -1,7 +1,6 @@
 import {
 	it,
 	inject,
-	injectAsync,
 	describe,
 	beforeEachProviders,
 	TestComponentBuilder,
@@ -29,7 +28,7 @@ export function main() {
 			}
 		}
 
-		it('should set img src', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
+		it('should set img src', fakeAsync(inject([TestComponentBuilder], (tcb: any) => {
 			return tcb.overrideTemplate(TestComponent, `<img ctSrc="http://example.com/image.jpg" [ctOptions]="{trim: true}" ctSize="origxorig"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
@@ -41,7 +40,7 @@ export function main() {
 				});
 		})));
 
-		it('should resolve img src', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
+		it('should resolve img src', fakeAsync(inject([TestComponentBuilder], (tcb: any) => {
 			return tcb.overrideTemplate(TestComponent, `<img ctSrc="image.jpg" [ctOptions]="{trim: true}" ctSize="origxorig"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
@@ -53,7 +52,7 @@ export function main() {
 				});
 		})));
 
-		it('should detect element size', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
+		it('should detect element size', fakeAsync(inject([TestComponentBuilder], (tcb: any) => {
 			return tcb.overrideTemplate(TestComponent, `<img ctSrc="http://example.com/image.jpg" style="width: 800px; height: 600px"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
@@ -65,7 +64,7 @@ export function main() {
 				});
 		})));
 
-		it('should detect parent element size', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
+		it('should detect parent element size', fakeAsync(inject([TestComponentBuilder], (tcb: any) => {
 			return tcb.overrideTemplate(TestComponent, `<div style="width: 800px; height: 600px"><img ctSrc="http://example.com/image.jpg"/></div>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
@@ -77,7 +76,7 @@ export function main() {
 				});
 		})));
 
-		it('should force size', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
+		it('should force size', fakeAsync(inject([TestComponentBuilder], (tcb: any) => {
 			return tcb.overrideTemplate(TestComponent, `<img ctSrc="http://example.com/image.jpg" style="width: 823px; height: 312px" ctForceSize="true"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
@@ -89,7 +88,7 @@ export function main() {
 				});
 		})));
 
-		it('should pass options', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
+		it('should pass options', fakeAsync(inject([TestComponentBuilder], (tcb: any) => {
 			return tcb.overrideTemplate(TestComponent, `<img ctSrc="http://example.com/image.jpg" [ctOptions]="{trim: true}"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
@@ -101,7 +100,7 @@ export function main() {
 				});
 		})));
 		
-		it('should set placeholder image', injectAsync([TestComponentBuilder], fakeAsync((tcb: any) => {
+		it('should set placeholder image', fakeAsync(inject([TestComponentBuilder], (tcb: any) => {
 			return tcb.overrideTemplate(TestComponent, `<img ctSrc="http://example.com/image.jpg" ctPlaceholderImage="http://example.com/placeholderImage.jpg"/>`)
 				.createAsync(TestComponent).then((fixture: any) => {
 					fixture.detectChanges();
