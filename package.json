@@ -31,7 +31,7 @@
     "lint": "./node_modules/.bin/tslint ./src/*.ts ./src/**/*.ts",
     "test": "karma start",
     "commit": "git-cz",
-    "build": "rm -rf ./dist/ && rm -rf ./typings/ && ./node_modules/.bin/typings install && tsc -d",
+    "build": "rm -rf ./typings/ && ./node_modules/.bin/typings install && tsc -d",
     "semantic-release": "semantic-release pre && npm run build && npm publish && semantic-release post"
   },
   "main": "./index.js",

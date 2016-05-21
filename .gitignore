@@ -14,7 +14,6 @@ coverage
 *.map
 *.d.ts
 typings
-dist
 
 #################
 ## JetBrains
