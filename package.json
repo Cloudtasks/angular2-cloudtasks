@@ -34,8 +34,8 @@
     "build": "rm -rf ./dist/ && rm -rf ./typings/ && ./node_modules/.bin/typings install && tsc -d",
     "semantic-release": "semantic-release pre && npm run build && npm publish && semantic-release post"
   },
-  "main": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
+  "main": "./index.js",
+  "typings": "./index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/Cloudtasks/angular2-cloudtasks.git"
