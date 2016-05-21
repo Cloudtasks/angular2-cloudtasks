@@ -1,14 +1,16 @@
 import {
-	it,
-	inject,
-	describe,
-	beforeEachProviders,
-	TestComponentBuilder,
-	fakeAsync,
+  it,
+  inject,
+  describe,
+  expect,
+  fakeAsync,
   tick
-} from 'angular2/testing';
+} from '@angular/core/testing';
+import {
+  TestComponentBuilder
+} from '@angular/compiler/testing';
 
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 
 import {CloudtasksService} from './service';
 import {CloudtasksDirective} from './directive';

@@ -19,43 +19,88 @@ function file2moduleName(filePath) {
 }
 
 System.config({
-	baseURL: '/base/',
+	baseURL: '/base',
 	defaultJSExtensions: true,
 	map: {
-		'angular2': 'node_modules/angular2',
+		'@angular': 'node_modules/@angular',
 		'rxjs': 'node_modules/rxjs'
-	}
+	},
+	packages: {
+    '@angular/core': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/compiler': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/common': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    // remove after all tests imports are fixed
+    '@angular/facade': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/router': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/router-deprecated': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/http': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/upgrade': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/platform-browser': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/platform-browser-dynamic': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/platform-server': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    }
+  }
 });
 
-Promise.all([
-  System.import('angular2/src/platform/browser/browser_adapter'),
-  System.import('angular2/platform/testing/browser'),
-  System.import('angular2/testing')
-]).then(function (modules) {
-var browser_adapter = modules[0];
-  var providers = modules[1];
-  var testing = modules[2];
-  testing.setBaseTestProviders(providers.TEST_BROWSER_PLATFORM_PROVIDERS,
-                       providers.TEST_BROWSER_APPLICATION_PROVIDERS);
-  browser_adapter.BrowserDomAdapter.makeCurrent();
-}).then(function() {
-		return Promise.all(
-			Object.keys(window.__karma__.files) // All files served by Karma.
-				.filter(onlySpecFiles)
-				.map(file2moduleName)
-				.map(function(path) {
-					return System.import(path).then(function(module) {
-						if (module.hasOwnProperty('main')) {
-							module.main();
-						} else {
-							throw new Error('Module ' + path + ' does not implement main() method.');
-						}
-					});
-				}));
-	})
-	.then(function() {
-		__karma__.start();
-	}, function(error) {
-		console.error(error.stack || error);
-		__karma__.start();
-	});
+System.import('@angular/core/testing')
+  .then(function(coreTesting){
+    return System.import('@angular/platform-browser-dynamic/testing')
+      .then(function(browserTesting){
+         coreTesting.setBaseTestProviders(
+          browserTesting.TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS,
+          browserTesting.TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS
+        );
+      });
+  })
+.then(function() {
+  return Promise.all(
+    Object.keys(window.__karma__.files) // All files served by Karma.
+    .filter(onlySpecFiles)
+    .map(window.file2moduleName)        // Normalize paths to module names.
+    .map(function(path) {
+      return System.import(path).then(function(module) {
+        if (module.hasOwnProperty('main')) {
+          module.main();
+        } else {
+          throw new Error('Module ' + path + ' does not implement main() method.');
+        }
+      });
+    }));
+})
+.then(function() {
+  __karma__.start();
+}, function(error) {
+  __karma__.error(error.stack || error);
+});
