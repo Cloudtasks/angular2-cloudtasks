@@ -25,7 +25,7 @@ If you use SystemJS to load your files, you might have to update your config wit
 ```js
 System.config({
 	packages: {
-		"/angular2-cloudtasks": {"defaultExtension": "js"}
+		"angular2-cloudtasks": {"defaultExtension": "js"}
 	}
 });
 ```
@@ -35,6 +35,7 @@ It is recommended to instantiate `CloudtasksService` in the bootstrap of your ap
 If you add it to the "providers" property of a component it will instantiate a new instance of the service that won't be initialized.
 
 ```js
+import {bootstrap} from '@angular/platform-browser-dynamic';
 import {CloudtasksService} from 'angular2-cloudtasks';
 
 bootstrap(AppComponent, [
@@ -42,7 +43,7 @@ bootstrap(AppComponent, [
 ]);
 
 
-import {Component, Injectable} from 'angular2/angular2';
+import {Component, Injectable} from '@angular/core';
 import {CloudtasksService, CloudtasksDirective} from 'angular2-cloudtasks';
 
 @Injectable()
