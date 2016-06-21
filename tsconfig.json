@@ -17,7 +17,7 @@
 		"noFallthroughCasesInSwitch": true
 	},
 	"files": [
-    "typings/browser.d.ts",
+    "typings/index.d.ts",
     "index.ts",
     "src/service.spec.ts",
     "src/service.ts",

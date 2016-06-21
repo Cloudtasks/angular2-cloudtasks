@@ -5,11 +5,11 @@
   "homepage": "https://cloudtasks.io",
   "dependencies": {},
   "devDependencies": {
-    "@angular/common": "^2.0.0-rc.1",
-    "@angular/compiler": "^2.0.0-rc.1",
-    "@angular/core": "^2.0.0-rc.1",
-    "@angular/platform-browser": "^2.0.0-rc.1",
-    "@angular/platform-browser-dynamic": "^2.0.0-rc.1",
+    "@angular/common": "^2.0.0-rc.2",
+    "@angular/compiler": "^2.0.0-rc.2",
+    "@angular/core": "^2.0.0-rc.2",
+    "@angular/platform-browser": "^2.0.0-rc.2",
+    "@angular/platform-browser-dynamic": "^2.0.0-rc.2",
     "commitizen": "~2.8.1",
     "cz-conventional-changelog": "~1.1.6",
     "es6-shim": "^0.35.0",
@@ -28,7 +28,7 @@
     "zone.js": "~0.6.12"
   },
   "scripts": {
-    "lint": "./node_modules/.bin/tslint ./src/*.ts ./src/**/*.ts",
+    "lint": "tslint ./src/*.ts ./src/**/*.ts",
     "test": "karma start",
     "commit": "git-cz",
     "build": "rm -rf ./typings/ && ./node_modules/.bin/typings install && tsc -d",
