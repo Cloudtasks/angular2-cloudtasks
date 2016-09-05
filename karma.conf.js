@@ -13,58 +13,46 @@ module.exports = function(config) {
 
 		// list of files / patterns to load in the browser
 		files: [
-			// for Travis
-			'node_modules/es6-shim/es6-shim.js',
+			// System.js for module loading
+      'node_modules/systemjs/dist/system.src.js',
 
-			// zone-microtask must be included first as it contains a Promise monkey patch
-			'node_modules/zone.js/dist/zone.js',
-			'node_modules/zone.js/dist/long-stack-trace-zone.js',
-			'node_modules/zone.js/dist/jasmine-patch.js',
-			'node_modules/zone.js/dist/async-test.js',
+      // Polyfills
+      'node_modules/core-js/client/shim.js',
+
+      // Reflect and Zone.js
+      'node_modules/reflect-metadata/Reflect.js',
+      'node_modules/zone.js/dist/zone.js',
+      'node_modules/zone.js/dist/long-stack-trace-zone.js',
+      'node_modules/zone.js/dist/proxy.js',
+      'node_modules/zone.js/dist/sync-test.js',
+      'node_modules/zone.js/dist/jasmine-patch.js',
+      'node_modules/zone.js/dist/async-test.js',
       'node_modules/zone.js/dist/fake-async-test.js',
-			'node_modules/systemjs/dist/system.src.js',
-			'node_modules/reflect-metadata/Reflect.js',
 
-			{ pattern: 'node_modules/@angular/**/*.js', included: false, watched: false, served: true },
-			{ pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false, served: true },
-			{ pattern: 'node_modules/systemjs/dist/system-polyfills.js', included: false, watched: false, served: true }, // PhantomJS2 (and possibly others) might require it
-			//{ pattern: 'node_modules/immutable/dist/immutable.js', included: true, watched: true },
+      // RxJs.
+      { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/rxjs/**/*.js.map', included: false, watched: false },
 
-			{ pattern: 'src/**/*.ts', included: false, watched: true }, // source files
+      // Angular 2 itself and the testing library
+      { pattern: 'node_modules/@angular/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/@angular/**/*.js.map', included: false, watched: false },
 
-			'karma-test-shim.js'
+      'karma-test-shim.js',
+
+      { pattern: 'src/**/*.ts', included: false, watched: true },
 		],
 
 		// list of files to exclude
 		exclude: [
-			'node_modules/angular2/**/*_spec.js'
+      'src/**/*.d.ts'
 		],
-
-		preprocessors: {
+    
+    preprocessors: {
 			'**/*.ts': ['typescript']
 		},
-
-		typescriptPreprocessor: {
-			options: {
-				"target": "es5",
-		    "module": "commonjs",
-		    "declaration": false,
-		    "removeComments": true,
-		    "noLib": false,
-		    "emitDecoratorMetadata": true,
-		    "experimentalDecorators": true,
-		    "sourceMap": false,
-		    "pretty": true,
-		    "allowUnreachableCode": false,
-		    "allowUnusedLabels": false,
-		    "noImplicitAny": true,
-		    "noImplicitReturns": false,
-		    "noImplicitUseStrict": false,
-		    "noFallthroughCasesInSwitch": true
-			},
-			typings: [
-				"typings/index.d.ts"
-			]
+    
+    typescriptPreprocessor: {
+			options: require('./tsconfig.json').compilerOptions,
 		},
 
 		customLaunchers: {

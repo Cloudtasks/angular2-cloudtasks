@@ -1,6 +1,16 @@
-import {Directive, Injectable, ElementRef, Renderer, Input, OnInit, AfterViewInit} from '@angular/core';
-import {getDOM} from '@angular/platform-browser/src/dom/dom_adapter';
-import {CloudtasksService} from './service';
+import {
+	Directive,
+	Injectable,
+	Inject,
+	ElementRef,
+	Renderer,
+	Input,
+	OnInit,
+	AfterViewInit
+} from '@angular/core';
+import { Location } from '@angular/common';
+import { DOCUMENT } from '@angular/platform-browser';
+import { CloudtasksService } from './service';
 
 @Injectable()
 @Directive({
@@ -16,7 +26,7 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 	@Input() ctSize: string;
 	@Input() ctForceSize: boolean;
 
-	private el: ElementRef;
+	private el: any;
 
 	private settings: any;
 	private width: number;
@@ -26,6 +36,8 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 	private tries: number = 0;
 
 	constructor(
+		@Inject(DOCUMENT) private document: Document,
+		private location: Location,
 		private elRef: ElementRef,
 		private renderer: Renderer,
 		private cloudtasks: CloudtasksService
@@ -51,12 +63,12 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 		if (this.ctSize) {
 			this.init();
 		} else {
-			var rect = getDOM().getBoundingClientRect(this.el);
+			var rect = this.el.getBoundingClientRect();
 			this.width = rect.width;
 			this.height = rect.height;
 
 			if (!this.width && !this.height) {
-				rect = getDOM().getBoundingClientRect(getDOM().parentElement(this.el));
+				rect = this.el.parentElement.getBoundingClientRect();
 				this.width = rect.width;
 				this.height = rect.height;
 
@@ -183,10 +195,10 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
 		this.optionsString = optionsString;
 	}
 
-	resolve(url:any) {
-		var loc = getDOM().getLocation().pathname.split('/');
+	resolve(url: any) {
+		var loc = this.location.path().split('/');
 		loc.pop();
-		var base:any = getDOM().getLocation().origin + loc.join('/') + '/';
+		var base: any = this.document.location.origin + loc.join('/') + '/';
 
     if('string' !== typeof url || !url) {
       // wrong or empty url
@@ -198,7 +210,7 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
       // url is absolute already
       return 'http:' + url;
     } else if ('string' !== typeof base) {
-      var a:any = getDOM().createElement('a');
+      var a:any = this.renderer.createElement(this.el, 'a');
       // try to resolve url without base
       a.href = url;
 
@@ -218,7 +230,7 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
       }
     }
 
-    var a:any = getDOM().createElement('a'); 
+    var a: any = this.renderer.createElement(this.el, 'a');
     a.href = base;
 
     if (url[0] === '/') {
@@ -231,7 +243,7 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
     }
     url = url.split('/');
 
-    for (var i=0; i < url.length; ++i) {
+    for (var i = 0; i < url.length; ++i) {
     	// current directory
       if (url[i] === '.') {
         continue;

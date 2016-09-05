@@ -35,22 +35,13 @@ It is recommended to instantiate `CloudtasksService` in the bootstrap of your ap
 If you add it to the "providers" property of a component it will instantiate a new instance of the service that won't be initialized.
 
 ```js
-import {bootstrap} from '@angular/platform-browser-dynamic';
-import {CloudtasksService} from 'angular2-cloudtasks';
+// component
+import { Component } from '@angular/core';
+import { CloudtasksService, CloudtasksDirective } from 'angular2-cloudtasks';
 
-bootstrap(AppComponent, [
-	CloudtasksService
-]);
-
-
-import {Component, Injectable} from '@angular/core';
-import {CloudtasksService, CloudtasksDirective} from 'angular2-cloudtasks';
-
-@Injectable()
 @Component({
 	selector: 'app',
-	template: `<img [ctSrc]="'http://example.com/image.jpg'" [ctOptions]="{trim: true, smart: 'face', filters: 'blur(10):flip()'}">`,
-	directives: [CloudtasksDirective]
+	template: `<img [ctSrc]="'http://example.com/image.jpg'" [ctOptions]="{trim: true, smart: 'face', filters: 'blur(10):flip()'}">`
 })
 export class AppComponent {
 	constructor(private cloudtasks: CloudtasksService) {
@@ -65,6 +56,20 @@ export class AppComponent {
 		cloudtasks.settings.placeholderImage = "http://example.com/placeholderImage.jpg";
 	}
 }
+
+// bootstrap
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CloudtasksService, CloudtasksDirective } from 'angular2-cloudtasks';
+
+@NgModule({
+  imports: [ CommonModule ],
+  declarations: [ AppComponent, CloudtasksDirective ], 
+  bootstrap: [ AppComponent ],
+  providers: [ 
+    CloudtasksService
+  ]  
+})
 ```
 
 ## API

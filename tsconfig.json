@@ -1,28 +1,36 @@
 {
 	"compilerOptions": {
 		"target": "es5",
-		"module": "commonjs",
-		"declaration": false,
-		"removeComments": true,
-		"noLib": false,
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"sourceMap": false,
-		"pretty": true,
-		"allowUnreachableCode": false,
-		"allowUnusedLabels": false,
-		"noImplicitAny": true,
-		"noImplicitReturns": false,
-		"noImplicitUseStrict": false,
-		"noFallthroughCasesInSwitch": true
+    "module": "commonjs",
+    "declaration": false,
+    "removeComments": true,
+    "noLib": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": false,
+    "pretty": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "noImplicitAny": true,
+    "noImplicitReturns": false,
+    "noImplicitUseStrict": false,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "types": [
+      "jasmine",
+      "node"
+    ],
+    "lib": ["es2015", "dom"]
 	},
 	"files": [
-    "typings/index.d.ts",
     "index.ts",
     "src/service.spec.ts",
     "src/service.ts",
     "src/directive.spec.ts",
     "src/directive.ts"
   ],
-	"compileOnSave": false
+	"compileOnSave": false,
+  "angularCompilerOptions": {
+    "skipTemplateCodegen": true
+  }
 }
