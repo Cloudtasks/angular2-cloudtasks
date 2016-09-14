@@ -37,7 +37,7 @@ If you add it to the "providers" property of a component it will instantiate a n
 ```js
 // component
 import { Component } from '@angular/core';
-import { CloudtasksService, CloudtasksDirective } from 'angular2-cloudtasks';
+import { CloudtasksService } from 'angular2-cloudtasks';
 
 @Component({
 	selector: 'app',
@@ -59,16 +59,16 @@ export class AppComponent {
 
 // bootstrap
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CloudtasksService, CloudtasksDirective } from 'angular2-cloudtasks';
+import { BrowserModule } from '@angular/platform-browser';
+import { CloudtasksModule } from 'angular2-cloudtasks';
 
 @NgModule({
-  imports: [ CommonModule ],
-  declarations: [ AppComponent, CloudtasksDirective ], 
-  bootstrap: [ AppComponent ],
-  providers: [ 
-    CloudtasksService
-  ]  
+  imports: [
+  	BrowserModule,
+  	CloudtasksModule
+  ],
+  declarations: [ AppComponent ], 
+  bootstrap: [ AppComponent ]
 })
 ```
 

@@ -3,12 +3,12 @@ import { CommonModule, Location } from '@angular/common';
 import { async, TestBed } from '@angular/core/testing';
 import { SpyLocation } from '@angular/common/testing';
 
+import { CloudtasksModule } from '../index';
 import { CloudtasksService } from './service';
 import { CloudtasksDirective } from './directive';
 
 @Component({
 	selector: 'TestComponent',
-	providers: [CloudtasksService],
 	template: ``
 })
 class TestComponent {
@@ -17,35 +17,20 @@ class TestComponent {
 	}
 }
 
-@NgModule({
-  imports: [CommonModule],
-  entryComponents: [
-    TestComponent
-  ],
-  exports: [
-    TestComponent
-  ],
-  declarations: [
-    TestComponent,
-    CloudtasksDirective
-  ],
-  providers: [
-    { provide: Location, useClass: SpyLocation },
-  ]
-})
-export class TestModule {
-}
-
 export function main() {
 	describe('CloudtasksDirective', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [
-          TestModule
+        	CommonModule,
+          CloudtasksModule.forRoot()
         ],
+        declarations: [
+			    TestComponent
+			  ],
         providers: [
-          CloudtasksService
+          { provide: Location, useClass: SpyLocation }
         ]
       });
     });

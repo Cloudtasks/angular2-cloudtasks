@@ -2,7 +2,7 @@ import { CloudtasksService } from './service';
 
 export function main() {
 	describe('CloudtasksService', () => {
-		let service:CloudtasksService;
+		let service: CloudtasksService;
 
 	  beforeEach(() => {
 	    service = new CloudtasksService();
