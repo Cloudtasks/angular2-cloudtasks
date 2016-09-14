@@ -1,6 +1,6 @@
 {
-	"compilerOptions": {
-		"target": "es5",
+  "compilerOptions": {
+    "target": "es5",
     "module": "commonjs",
     "declaration": false,
     "removeComments": true,
@@ -21,15 +21,15 @@
       "node"
     ],
     "lib": ["es2015", "dom"]
-	},
-	"files": [
+  },
+  "files": [
     "index.ts",
     "src/service.spec.ts",
     "src/service.ts",
     "src/directive.spec.ts",
     "src/directive.ts"
   ],
-	"compileOnSave": false,
+  "compileOnSave": false,
   "angularCompilerOptions": {
     "skipTemplateCodegen": true
   }
