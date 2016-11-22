@@ -42,7 +42,7 @@
     "tslint-loader": "^2.1.5",
     "typescript": "2.0.2",
     "webpack": "^1.13.2",
-    "zone.js": "0.6.21"
+    "zone.js": "0.7.0"
   },
   "scripts": {
     "lint": "tslint ./src/*.ts ./src/**/*.ts",
