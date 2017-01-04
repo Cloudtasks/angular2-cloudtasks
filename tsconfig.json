@@ -20,10 +20,11 @@
       "jasmine",
       "node"
     ],
-    "lib": ["es2015", "dom"]
+    "lib": ["es2015", "dom"],
+    "outDir": "dist"
   },
   "files": [
-    "index.ts",
+    "src/index.ts",
     "src/service.spec.ts",
     "src/service.ts",
     "src/directive.spec.ts",
