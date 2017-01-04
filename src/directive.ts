@@ -36,7 +36,7 @@ export class CloudtasksDirective implements OnInit, AfterViewInit {
   private tries: number = 0;
 
   constructor(
-    @Inject(DOCUMENT) private document: Document,
+    @Inject(DOCUMENT) private document: any,
     private location: Location,
     private elRef: ElementRef,
     private renderer: Renderer,
