@@ -32,7 +32,7 @@
     "rxjs": "^5.0.1",
     "semantic-release": "^4.3.5",
     "source-map-loader": "^0.1.5",
-    "systemjs": "^0.19.38",
+    "systemjs": "^0.20.4",
     "ts-helpers": "^1.1.1",
     "tslint": "^3.15.1",
     "tslint-loader": "^2.1.5",
