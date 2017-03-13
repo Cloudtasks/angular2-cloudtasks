@@ -38,7 +38,7 @@
     "tslint-loader": "^2.1.5",
     "typescript": "2.0.2",
     "webpack": "^1.13.2",
-    "zone.js": "^0.7.2"
+    "zone.js": "^0.8.1"
   },
   "scripts": {
     "rimraf": "rimraf",
